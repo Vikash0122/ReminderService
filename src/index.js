@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { PORT } = require('./config/serverConfig');
 const { sendBasicEmail } = require('./services/email-service');
+const cron = require('node-cron');
 
 const setUpAndStartServer = () => {
     const app = express();
@@ -16,6 +17,9 @@ const setUpAndStartServer = () => {
         //     'Testing Email 2',
         //     'Hey vikash, how are you? This is just a test email.'
         // );
+        cron.schedule("*/2 * * * *", () => {
+            console.log("running a task every two minutes");
+        });
     })
 }
 
